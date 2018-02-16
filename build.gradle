@@ -1,0 +1,20 @@
+plugins {
+    id 'org.springframework.boot' version '1.5.10.RELEASE'
+}
+
+group 'com.nsc5171.myprojects'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-web'
+
+     testCompile 'junit:junit:4.12'
+}
