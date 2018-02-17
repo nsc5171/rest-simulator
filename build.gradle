@@ -20,6 +20,13 @@ dependencies {
     compile 'org.projectlombok:lombok:1.16.20'
     compile 'com.h2database:h2'
     compile group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9.13'
+    compile group: 'com.jayway.jsonpath', name: 'json-path', version: '2.0.0'
+    compile 'commons-io:commons-io:2.4'
+    // https://mvnrepository.com/artifact/com.jayway.restassured/xml-path
+    compile group: 'com.jayway.restassured', name: 'xml-path', version: '2.9.0'
+// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+
 
     testCompile 'junit:junit:4.12'
 }
