@@ -28,19 +28,19 @@ public class RequestParserService {
             case "JSON": {
                 try {
                     identifier = JsonPath.parse(getRequestBodyAsString(request)).read(keyPath);
-                } catch (IOException |PathNotFoundException e) {
+                } catch (Exception e) {
                     log.warn("Exception while querying path for value in JSON", e);
-                    throw new IdentifierResolutionException("Exception while querying path for value in JSON", e);
+                    throw new IdentifierResolutionException("Exception while querying path for value in JSON. "+ e.getMessage(), e);
                 }
                 log.debug("JSON CASE: identifier :" + identifier);
                 break;
             }
             case "XML": {
                 try {
-                    identifier = XmlPath.with(getRequestBodyAsString(request)).getString(keyPath);
-                } catch (IOException e) {
+                    identifier = XmlPath.given(getRequestBodyAsString(request)).getString(keyPath);
+                } catch (Exception e) {
                     log.warn("Exception while querying path for value in XML", e);
-                    throw new IdentifierResolutionException("Exception while querying path for value in XML", e);
+                    throw new IdentifierResolutionException("Exception while querying path for value in XML. "+ e.getMessage(), e);
                 }
                 log.debug("XML CASE: identifier :" + identifier);
                 break;
