@@ -13,7 +13,6 @@ import java.util.Iterator;
 import java.util.List;
 
 @RestController
-@RequestMapping("/simulator")
 public class RestSimulatorTestController {
 
     @Autowired

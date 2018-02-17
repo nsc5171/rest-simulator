@@ -1,5 +1,6 @@
 server:
-   port: 9999
+  port: 9999
+  context-path: /simulator
 
 spring:
   jpa:
@@ -12,3 +13,6 @@ spring:
 
 hibernate:
   dialect: "org.hibernate.dialect.H2Dialect"
+
+logging:
+  level: debug
