@@ -16,6 +16,10 @@ repositories {
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.xerial:sqlite-jdbc:3.21.0.1'
+    compile 'org.projectlombok:lombok:1.16.20'
+    compile 'com.h2database:h2'
+    compile group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9.13'
 
-     testCompile 'junit:junit:4.12'
+    testCompile 'junit:junit:4.12'
 }

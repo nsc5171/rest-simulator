@@ -1,2 +1,14 @@
 server:
    port: 9999
+
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:h2:./test2
+
+
+hibernate:
+  dialect: "org.hibernate.dialect.H2Dialect"
