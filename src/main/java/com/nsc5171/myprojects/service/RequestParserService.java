@@ -1,6 +1,7 @@
 package com.nsc5171.myprojects.service;
 
 import com.jayway.jsonpath.JsonPath;
+import com.jayway.jsonpath.PathNotFoundException;
 import com.jayway.restassured.path.xml.XmlPath;
 import com.nsc5171.myprojects.exception.IdentifierResolutionException;
 import lombok.extern.log4j.Log4j;
@@ -27,7 +28,7 @@ public class RequestParserService {
             case "JSON": {
                 try {
                     identifier = JsonPath.parse(getRequestBodyAsString(request)).read(keyPath);
-                } catch (IOException e) {
+                } catch (IOException |PathNotFoundException e) {
                     log.warn("Exception while querying path for value in JSON", e);
                     throw new IdentifierResolutionException("Exception while querying path for value in JSON", e);
                 }
@@ -51,7 +52,9 @@ public class RequestParserService {
     }
 
     private String getRequestBodyAsString(HttpServletRequest request) throws IOException {
-        return IOUtils.toString(request.getInputStream());
+        String requestBody=IOUtils.toString(request.getReader());
+        System.out.println("------------------->\n"+requestBody);
+        return requestBody;
     }
 
 

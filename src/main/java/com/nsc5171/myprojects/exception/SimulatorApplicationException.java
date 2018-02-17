@@ -7,7 +7,7 @@ public class SimulatorApplicationException extends Exception {
         super(message);
     }
 
-    public SimulatorApplicationException(String message, IOException e) {
+    public SimulatorApplicationException(String message, Exception e) {
         super(message,e);
     }
 }

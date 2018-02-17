@@ -7,7 +7,7 @@ public class NoSuchSimulationException extends SimulatorApplicationException {
         super(message);
     }
 
-    public NoSuchSimulationException(String message, IOException e) {
+    public NoSuchSimulationException(String message, Exception e) {
         super(message, e);
     }
 }

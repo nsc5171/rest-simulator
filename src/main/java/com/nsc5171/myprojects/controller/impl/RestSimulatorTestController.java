@@ -4,10 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nsc5171.myprojects.dao.entities.Simulation;
 import com.nsc5171.myprojects.dao.repositories.SimulatedResponseRepository;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,12 +22,18 @@ public class RestSimulatorTestController {
     SimulatedResponseRepository responseDao;
 
     @RequestMapping("/")
-    public String HelloWorld(){
+    @PostMapping
+    public String HelloWorld(HttpServletRequest request){
         Simulation response= new Simulation();
         response.setId(1);
         response.setIdentifier("identif");
         response.setSimulator("zim");
         response.setResponse("das");
+        try {
+            System.out.println("Request Body: "+ IOUtils.toString(request.getInputStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         try {
             System.out.println(new ObjectMapper().writeValueAsString(response));
         } catch (JsonProcessingException e) {
