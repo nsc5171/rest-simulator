@@ -25,7 +25,7 @@ public class RestSimulatorTestController {
     @PostMapping
     public String HelloWorld(HttpServletRequest request){
         Simulation response= new Simulation();
-        response.setResponseId(1);
+//        response.setResponseId(1);
 //        response.setIdentifier("identif");
 //        response.setSimulator("zim");
         response.setResponse("das");
@@ -54,15 +54,7 @@ public class RestSimulatorTestController {
         return "added";
     }
 
-    @RequestMapping(value = "/get/{delay}/{responseId}",produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Simulation getResponse(@PathVariable Long delay, @PathVariable Long id){
-        try {
-            Thread.sleep(delay);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return responseDao.findByResponseId(id);
-    }@RequestMapping(value = {"/get/{delay}","/get"},produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = {"/get/{delay}","/get"},produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<Simulation> getAllResponses(@PathVariable(required = false) Long delay){
         try {
             Thread.sleep(delay);

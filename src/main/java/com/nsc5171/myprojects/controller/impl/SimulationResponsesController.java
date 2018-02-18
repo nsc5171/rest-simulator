@@ -15,16 +15,7 @@ public class SimulationResponsesController extends AppController {
         return simulationRepository.findOne(simulation.getSimulationId());
     }
 
-    @DeleteMapping(value = "/deleteSimulation/{responseId}")
-    public String deleteSimulationByResponseId(@PathVariable Long responseId) {
-        Simulation toBeDeleted = simulationRepository.findByResponseId(responseId);
-        if (toBeDeleted != null) {
-            simulationRepository.delete(toBeDeleted);
-            return "Deleted simulation with responseId: "+responseId;
-        }else {
-            return "Could not find a simulation with responseId: "+responseId;
-        }
-    }
+
 
     @DeleteMapping(value = "/deleteSimulation/{simulator}/{identifier}")
     public String deleteSimulationBySimulationId(@PathVariable String simulator,@PathVariable String identifier){

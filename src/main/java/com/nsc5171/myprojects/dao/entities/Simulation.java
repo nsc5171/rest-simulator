@@ -27,9 +27,6 @@ import java.util.TimeZone;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Simulation{
 
-    @Column(unique = true,updatable = false)
-    private long responseId=System.currentTimeMillis();
-
    @EmbeddedId
    private SimulationId simulationId;
 
@@ -38,16 +35,5 @@ public class Simulation{
 
     @NotNull
     private String response;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ",timezone = "UTC")
-    @CreationTimestamp
-    @Column(updatable = false)
-    private Date createdOn;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ",timezone = "UTC")
-    @UpdateTimestamp
-    private Date lastUpdatedOn;
-
-
 }
 

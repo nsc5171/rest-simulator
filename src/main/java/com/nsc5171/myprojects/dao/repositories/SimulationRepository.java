@@ -10,7 +10,6 @@ import javax.transaction.Transactional;
 @Repository
 public interface SimulationRepository extends CrudRepository<Simulation, SimulationId> {
 
-    public Simulation findByResponseId(Long responseId);
 
 
 }
