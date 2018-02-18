@@ -25,10 +25,10 @@ import java.util.Date;
 import java.util.TimeZone;
 
 @Entity(name = "RESPONSE")
-@NamedQueries(value = {
-        @NamedQuery(name = "limited_details_list_by_simulator_name", query = "select r.simulationId.simulator,r.simulationId.identifier,r.responseFormat from RESPONSE r where r.simulationId.simulator= :simulator"),
-        @NamedQuery(name = "limited_details_list_by_identifier", query = "select r.simulationId.simulator,r.simulationId.identifier,r.responseFormat from RESPONSE r where r.simulationId.identifier= :identifier")
-})
+//@NamedQueries(value = {
+//        @NamedQuery(name = "limited_details_list_by_simulator_name", query = "select r.simulationId.simulator,r.simulationId.identifier,r.responseFormat from RESPONSE r where r.simulationId.simulator= :simulator"),
+//        @NamedQuery(name = "limited_details_list_by_identifier", query = "select r.simulationId.simulator,r.simulationId.identifier,r.responseFormat from RESPONSE r where r.simulationId.identifier= :identifier")
+//})
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Data

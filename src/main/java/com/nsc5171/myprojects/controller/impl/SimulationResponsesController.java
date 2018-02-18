@@ -3,11 +3,11 @@ package com.nsc5171.myprojects.controller.impl;
 import com.nsc5171.myprojects.controller.AppController;
 import com.nsc5171.myprojects.dao.entities.Simulation;
 import com.nsc5171.myprojects.dao.entities.id.SimulationId;
+import com.nsc5171.myprojects.dao.entities.projections.SimulationWithoutResponse;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -44,11 +44,9 @@ public class SimulationResponsesController extends AppController {
         }
     }
 
-    @Transactional(readOnly = true)
     @GetMapping(value = "/listSimulations/{simulator}")
     public Object listSimulationsBySimulatorName(@PathVariable String simulator){
-        List<Simulation> simulations=simulationRepository.limitedListDetailBySimulatorName(simulator);
-        System.out.println("list size: "+simulations.size() +"type: "+simulations.getClass());
+        List<SimulationWithoutResponse> simulations=simulationRepository.findBySimulationId_Simulator(simulator);//simulationRepository.limitedListDetailBySimulatorName(simulator);
         if(simulations!=null&&simulations.size()>0){
             return simulations;
         }else {
@@ -56,17 +54,13 @@ public class SimulationResponsesController extends AppController {
         }
     }
 
-    @Transactional(readOnly = true)
     @GetMapping(value = "/listSimulationsByIdentifier/{identifier}")
-    public List<Simulation> listSimulationsByIdentifierName(@PathVariable String identifier){
-        Stream<Simulation> simulationStream=simulationRepository.limitedListDetailByIdentifier(identifier);
-        System.out.println("list size: "+simulationStream.count());
-        List<Simulation>  simulations=new ArrayList<>();
-        simulationStream.forEach(s->simulations.add(new Simulation(s.getSimulationId(),s.getResponseFormat(),s.getResponse())));
+    public Object listSimulationsByIdentifierName(@PathVariable String identifier){
+        List<SimulationWithoutResponse> simulations=simulationRepository.findBySimulationId_Identifier(identifier);
         if(simulations!=null&&simulations.size()>0){
             return simulations;
         }else {
-            return null;//"Could not find simulation with identifier: "+identifier;
+            return "Could not find simulation with identifier: "+identifier;
         }
     }
 }
