@@ -44,7 +44,7 @@ public class SimulationResponsesController extends AppController {
         }
     }
 
-    @GetMapping(value = "/listSimulations/{simulator}")
+    @GetMapping(value = "/listSimulationsBySimulator/{simulator}")
     public Object listSimulationsBySimulatorName(@PathVariable String simulator){
         List<SimulationWithoutResponse> simulations=simulationRepository.findBySimulationId_Simulator(simulator);//simulationRepository.limitedListDetailBySimulatorName(simulator);
         if(simulations!=null&&simulations.size()>0){
@@ -63,4 +63,15 @@ public class SimulationResponsesController extends AppController {
             return "Could not find simulation with identifier: "+identifier;
         }
     }
+
+    @GetMapping(value = "/listSimulations")
+    public Object listAllSimulations(){
+        List<SimulationWithoutResponse> simulations=simulationRepository.findBy(SimulationWithoutResponse.class);
+        if(simulations!=null&&simulations.size()>0){
+            return simulations;
+        }else {
+            return "No simulations present";
+        }
+    }
+
 }

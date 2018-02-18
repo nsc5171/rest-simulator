@@ -14,6 +14,8 @@ import java.util.stream.Stream;
 @Repository
 public interface SimulationRepository extends CrudRepository<Simulation, SimulationId> {
 
+    List<SimulationWithoutResponse> findBy(Class<SimulationWithoutResponse> simulationWithoutResponseClass);
+
     List<SimulationWithoutResponse> findBySimulationId_Simulator(String simulator);
 
     List<SimulationWithoutResponse> findBySimulationId_Identifier(String identifier);
