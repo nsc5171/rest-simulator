@@ -3,7 +3,7 @@ package com.nsc5171.myprojects.controller.impl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nsc5171.myprojects.dao.entities.Simulation;
-import com.nsc5171.myprojects.dao.repositories.SimulatedResponseRepository;
+import com.nsc5171.myprojects.dao.repositories.SimulationRepository;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,15 +19,15 @@ import java.util.List;
 public class RestSimulatorTestController {
 
     @Autowired
-    SimulatedResponseRepository responseDao;
+    SimulationRepository responseDao;
 
     @RequestMapping("/")
     @PostMapping
     public String HelloWorld(HttpServletRequest request){
         Simulation response= new Simulation();
-        response.setId(1);
-        response.setIdentifier("identif");
-        response.setSimulator("zim");
+        response.setResponseId(1);
+//        response.setIdentifier("identif");
+//        response.setSimulator("zim");
         response.setResponse("das");
         try {
             System.out.println("Request Body: "+ IOUtils.toString(request.getInputStream()));
@@ -54,14 +54,14 @@ public class RestSimulatorTestController {
         return "added";
     }
 
-    @RequestMapping(value = "/get/{delay}/{id}",produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/get/{delay}/{responseId}",produces = {MediaType.APPLICATION_JSON_VALUE})
     public Simulation getResponse(@PathVariable Long delay, @PathVariable Long id){
         try {
             Thread.sleep(delay);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return responseDao.findOne(id);
+        return responseDao.findByResponseId(id);
     }@RequestMapping(value = {"/get/{delay}","/get"},produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<Simulation> getAllResponses(@PathVariable(required = false) Long delay){
         try {

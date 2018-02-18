@@ -53,7 +53,7 @@ public class RequestParserService {
 
     private String getRequestBodyAsString(HttpServletRequest request) throws IOException {
         String requestBody=IOUtils.toString(request.getReader());
-        System.out.println("------------------->\n"+requestBody);
+        log.debug("Request Body: "+requestBody);
         return requestBody;
     }
 
