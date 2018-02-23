@@ -7,5 +7,4 @@ import lombok.Value;
 public class SimulationWithoutResponse {
 
     private SimulationId simulationId;
-    private String responseFormat;
 }
