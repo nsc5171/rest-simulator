@@ -1,6 +1,7 @@
 package com.nsc5171.myprojects.dao.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.nsc5171.myprojects.dao.entities.id.SimulationId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,13 +17,11 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Simulation {
 
     @EmbeddedId
     private SimulationId simulationId;
-
-    @NotNull
-    private String responseFormat;
 
     @NotNull
     private String response;
