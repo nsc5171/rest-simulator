@@ -44,6 +44,11 @@ public class RequestParserService {
                 log.debug("XML CASE: identifier :" + identifier);
                 break;
             }
+            case "QUERY":{
+                identifier=request.getParameter(keyPath);
+                log.debug("QUERY CASE: identifier :" + identifier);
+                break;
+            }
         }
 
         if (StringUtils.isBlank(identifier)) throw new IdentifierResolutionException("Could not resolve identifier");
