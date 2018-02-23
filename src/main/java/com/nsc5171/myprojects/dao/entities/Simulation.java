@@ -27,7 +27,7 @@ public class Simulation {
     @NotNull
     private String response;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,orphanRemoval = true)
     private List<Header> headers;
 }
 
