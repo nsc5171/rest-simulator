@@ -1,5 +1,6 @@
 package com.nsc5171.myprojects.dao.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.nsc5171.myprojects.dao.entities.id.SimulationId;
 import lombok.AllArgsConstructor;
@@ -8,26 +9,24 @@ import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
-import java.util.Map;
 
-@Entity(name = "RESPONSE")
+@Entity
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Simulation {
+public class Header {
 
-    @EmbeddedId
-    private SimulationId simulationId;
+    @JsonIgnore
+    @Id
+    @SequenceGenerator(sequenceName = "header_seq", initialValue = 1, name = "header_seq",allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "header_seq")
+    private Long headerId;
 
     @NotNull
-    private String responseFormat;
+    private String key;
 
     @NotNull
-    private String response;
+    private String value;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private List<Header> headers;
 }
-

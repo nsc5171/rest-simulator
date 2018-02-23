@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @RestController
 public class RestSimulatorTestController {
@@ -29,6 +27,9 @@ public class RestSimulatorTestController {
 //        response.setIdentifier("identif");
 //        response.setSimulator("zim");
         response.setResponse("das");
+        Map<String,String> headers=new HashMap<>();
+        headers.put("testheadkey","testheadvalue");
+//        response.setHeaders(headers);
         try {
             System.out.println("Request Body: " + IOUtils.toString(request.getInputStream()));
         } catch (IOException e) {
