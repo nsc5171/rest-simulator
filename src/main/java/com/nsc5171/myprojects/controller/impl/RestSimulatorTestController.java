@@ -23,14 +23,14 @@ public class RestSimulatorTestController {
 
     @RequestMapping("/")
     @PostMapping
-    public String HelloWorld(HttpServletRequest request){
-        Simulation response= new Simulation();
+    public String HelloWorld(HttpServletRequest request) {
+        Simulation response = new Simulation();
 //        response.setResponseId(1);
 //        response.setIdentifier("identif");
 //        response.setSimulator("zim");
         response.setResponse("das");
         try {
-            System.out.println("Request Body: "+ IOUtils.toString(request.getInputStream()));
+            System.out.println("Request Body: " + IOUtils.toString(request.getInputStream()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,7 +44,7 @@ public class RestSimulatorTestController {
 
     @PostMapping
     @RequestMapping("/add")
-    public String addResponse(@RequestBody Simulation response){
+    public String addResponse(@RequestBody Simulation response) {
         responseDao.save(response);
         try {
             System.out.println(new ObjectMapper().writeValueAsString(response));
@@ -54,16 +54,16 @@ public class RestSimulatorTestController {
         return "added";
     }
 
-    @RequestMapping(value = {"/get/{delay}","/get"},produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<Simulation> getAllResponses(@PathVariable(required = false) Long delay){
+    @RequestMapping(value = {"/get/{delay}", "/get"}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<Simulation> getAllResponses(@PathVariable(required = false) Long delay) {
         try {
             Thread.sleep(delay);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        List<Simulation> simulationList =new ArrayList<>();
-        Iterator<Simulation> iterator=responseDao.findAll().iterator();
-        while(iterator.hasNext()){
+        List<Simulation> simulationList = new ArrayList<>();
+        Iterator<Simulation> iterator = responseDao.findAll().iterator();
+        while (iterator.hasNext()) {
             simulationList.add(iterator.next());
         }
         return simulationList;

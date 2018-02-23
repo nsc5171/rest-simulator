@@ -1,7 +1,6 @@
 package com.nsc5171.myprojects.service;
 
 import com.jayway.jsonpath.JsonPath;
-import com.jayway.jsonpath.PathNotFoundException;
 import com.jayway.restassured.path.xml.XmlPath;
 import com.nsc5171.myprojects.exception.IdentifierResolutionException;
 import lombok.extern.log4j.Log4j;
@@ -30,7 +29,7 @@ public class RequestParserService {
                     identifier = JsonPath.parse(getRequestBodyAsString(request)).read(keyPath);
                 } catch (Exception e) {
                     log.warn("Exception while querying path for value in JSON", e);
-                    throw new IdentifierResolutionException("Exception while querying path for value in JSON. "+ e.getMessage(), e);
+                    throw new IdentifierResolutionException("Exception while querying path for value in JSON. " + e.getMessage(), e);
                 }
                 log.debug("JSON CASE: identifier :" + identifier);
                 break;
@@ -40,7 +39,7 @@ public class RequestParserService {
                     identifier = XmlPath.given(getRequestBodyAsString(request)).getString(keyPath);
                 } catch (Exception e) {
                     log.warn("Exception while querying path for value in XML", e);
-                    throw new IdentifierResolutionException("Exception while querying path for value in XML. "+ e.getMessage(), e);
+                    throw new IdentifierResolutionException("Exception while querying path for value in XML. " + e.getMessage(), e);
                 }
                 log.debug("XML CASE: identifier :" + identifier);
                 break;
@@ -52,8 +51,8 @@ public class RequestParserService {
     }
 
     private String getRequestBodyAsString(HttpServletRequest request) throws IOException {
-        String requestBody=IOUtils.toString(request.getReader());
-        log.debug("Request Body: "+requestBody);
+        String requestBody = IOUtils.toString(request.getReader());
+        log.debug("Request Body: " + requestBody);
         return requestBody;
     }
 

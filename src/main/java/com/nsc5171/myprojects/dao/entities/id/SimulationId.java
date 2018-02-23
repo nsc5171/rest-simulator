@@ -13,7 +13,7 @@ import java.io.Serializable;
 @RequiredArgsConstructor
 @Embeddable
 @JsonIgnoreProperties(ignoreUnknown = true)
- public class SimulationId implements Serializable{
+public class SimulationId implements Serializable {
 
     private String simulator;
     private String identifier;
