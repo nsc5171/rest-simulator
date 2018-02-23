@@ -6,6 +6,7 @@ import com.nsc5171.myprojects.dao.entities.id.SimulationId;
 import com.nsc5171.myprojects.exception.IdentifierResolutionException;
 import com.nsc5171.myprojects.exception.NoSuchSimulationException;
 import com.nsc5171.myprojects.service.RequestParserService;
+import com.nsc5171.myprojects.utils.SignatureUtil;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,9 @@ public class RestSimulatorController extends AppController {
 
     @Autowired
     RequestParserService requestParserService;
+
+    @Autowired
+    SignatureUtil signatureUtil;
 
 
     @PostMapping(value = {"{simulator}/{keySearchLocation}/{keyPath}/{delay}",
@@ -42,7 +46,7 @@ public class RestSimulatorController extends AppController {
         if (simulation == null) {
             throw new NoSuchSimulationException("Could not find a simulation mapped to simulator: " + simulator + " and identifier: " + identifier);
         }
-//        response.setContentType(simulation.getResponseFormat());
+        signatureUtil.addSignature(response);
         return simulation.getResponse();
 
     }
@@ -64,7 +68,7 @@ public class RestSimulatorController extends AppController {
         if (simulation == null) {
             throw new NoSuchSimulationException("Could not find a simulation mapped to simulator: " + simulator + " and identifier: " + identifier);
         }
-//        response.setContentType(simulation.getResponseFormat());
+        signatureUtil.addSignature(response);
         return simulation.getResponse();
 
     }
