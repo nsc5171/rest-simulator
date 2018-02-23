@@ -47,7 +47,7 @@ public class RestSimulatorController extends AppController {
             throw new NoSuchSimulationException("Could not find a simulation mapped to simulator: " + simulator + " and identifier: " + identifier);
         }
         signatureUtil.addSignature(response);
-        return simulation.getResponse();
+        return encodeDecodeUtil.decode(simulation.getResponse());
 
     }
 
@@ -69,7 +69,7 @@ public class RestSimulatorController extends AppController {
             throw new NoSuchSimulationException("Could not find a simulation mapped to simulator: " + simulator + " and identifier: " + identifier);
         }
         signatureUtil.addSignature(response);
-        return simulation.getResponse();
+        return encodeDecodeUtil.decode(simulation.getResponse());
 
     }
 
