@@ -82,5 +82,9 @@ public class SimulationResponsesController extends AppController {
             return "No simulations present";
         }
     }
+    @GetMapping(value = "/export")
+    public Iterable<Simulation> export(){
+        return simulationRepository.findAll();
+    }
 
 }
