@@ -10,7 +10,7 @@ import java.util.List;
 public class ResponseUtil {
 
     public void addSignature(HttpServletResponse response){
-        response.setHeader("ResponseType","simulated -by com.nsc5171.myprojects.rest-simulators");
+        response.setHeader("ResponseType","simulated -by com.nsc5171.myprojects.rest-simulator");
     }
 
     public void addHeaders(HttpServletResponse response,List<Header> headers){
