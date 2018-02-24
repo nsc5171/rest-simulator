@@ -24,29 +24,32 @@ public class SimulationResponsesController extends AppController {
 
 
     @PostMapping(value = "/addOrUpdateSimulations")
-    public Iterable<Simulation> addOrUpdateSimulation(@RequestBody List<Simulation> simulations) {
+    public Iterable<Simulation> addOrUpdateSimulations(@RequestBody List<Simulation> simulations) {
         return simulationRepository.save(simulations);
     }
 
 
-    @DeleteMapping(value = "/deleteSimulation/{simulator}/{identifier}")
-    public String deleteSimulationBySimulationId(@PathVariable String simulator, @PathVariable String identifier) {
-        SimulationId toBeDeleted = new SimulationId(simulator, identifier);
-        if (simulationRepository.exists(toBeDeleted)) {
-            simulationRepository.delete(toBeDeleted);
-            return "Deleted simulation with simulator name: " + simulator + " and identifier: " + identifier;
-        } else {
-            return "Could not find simulation with simulator name: " + simulator + " and identifier: " + identifier;
+    @DeleteMapping(value = "/deleteSimulations")
+    public String deleteSimulationBySimulationIds(@RequestBody List<SimulationId> simulationIds) {
+        StringBuffer message=new StringBuffer();
+        for(SimulationId toBeDeleted: simulationIds) {
+            if (simulationRepository.exists(toBeDeleted)) {
+                simulationRepository.delete(toBeDeleted);
+                message.append("Deleted simulation with simulator name: ").append(toBeDeleted.getSimulator()).append(" and identifier: ").append(toBeDeleted.getIdentifier()).append("\n");
+            } else {
+                message.append("Could not find simulation with simulator name: ").append(toBeDeleted.getSimulator()).append(" and identifier: ").append(toBeDeleted.getIdentifier()).append("\n");
+            }
         }
+        return message.toString();
     }
 
-    @GetMapping(value = "/getSimulation/{simulator}/{identifier}")
-    public Object findSimulation(@PathVariable String simulator, @PathVariable String identifier) {
-        Simulation simulation = simulationRepository.findOne(new SimulationId(simulator, identifier));
-        if (simulation != null) {
-            return simulation;
+    @PostMapping(value = "/getSimulations")
+    public Object findSimulations(@RequestBody List<SimulationId> simulationIds) {
+        Iterable<Simulation> simulations = simulationRepository.findAll(simulationIds);
+        if (simulations != null&&simulations.iterator().hasNext()) {
+            return simulations;
         } else {
-            return "Could not find simulation with simulator name: " + simulator + " and identifier: " + identifier;
+            return "Could not find simulation any matching simulations";
         }
     }
 
