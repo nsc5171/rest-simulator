@@ -4,13 +4,14 @@ import com.nsc5171.myprojects.controller.AppController;
 import com.nsc5171.myprojects.dao.entities.Simulation;
 import com.nsc5171.myprojects.dao.entities.id.SimulationId;
 import com.nsc5171.myprojects.dao.entities.projections.SimulationWithoutResponse;
+import io.swagger.annotations.Api;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@Api( value = "/people", description = "Manage people" )
+@Api( description = "Manage Simulations" )
 public class SimulationResponsesController extends AppController {
 
     @PostMapping(value = "/encodeResponse", consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
