@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@Api( value = "/people", description = "Manage people" )
 public class SimulationResponsesController extends AppController {
 
     @PostMapping(value = "/encodeResponse", consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
