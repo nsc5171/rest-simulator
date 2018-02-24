@@ -4,8 +4,6 @@ import com.nsc5171.myprojects.controller.AppController;
 import com.nsc5171.myprojects.dao.entities.Simulation;
 import com.nsc5171.myprojects.dao.entities.id.SimulationId;
 import com.nsc5171.myprojects.dao.entities.projections.SimulationWithoutResponse;
-import com.nsc5171.myprojects.utils.EncodeDecodeUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,10 +23,9 @@ public class SimulationResponsesController extends AppController {
     }
 
 
-    @PostMapping(value = "/addOrUpdateSimulation")
-    public Simulation addOrUpdateSimulation(@RequestBody Simulation simulation) {
-        simulationRepository.save(simulation);
-        return simulationRepository.findOne(simulation.getSimulationId());
+    @PostMapping(value = "/addOrUpdateSimulations")
+    public Iterable<Simulation> addOrUpdateSimulation(@RequestBody List<Simulation> simulations) {
+        return simulationRepository.save(simulations);
     }
 
 
