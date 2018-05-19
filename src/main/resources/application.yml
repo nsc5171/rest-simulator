@@ -17,3 +17,10 @@ hibernate:
 #logging:
 #  level:
 #    root: debug
+
+management:
+  endpoint:
+    shutdown:
+      enabled : true
+#  security:
+#    enabled: false
