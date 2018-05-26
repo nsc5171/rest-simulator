@@ -1,2 +1,3 @@
 # rest-simulator
-simulator for rest services
+ReST Services - Simulator : Provides simulated responses, easy to configure and use.
+•	Spring-Boot microservice simulator with embedded database for better security.
