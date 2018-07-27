@@ -6,7 +6,9 @@ import com.nsc5171.myprojects.dao.entities.Simulation;
 import com.nsc5171.myprojects.dao.repositories.SimulationRepository;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,14 +47,14 @@ public class RestSimulatorTestController {
 
     @PostMapping
     @RequestMapping("/add")
-    public String addResponse(@RequestBody Simulation response) {
+    public ResponseEntity addResponse(@RequestBody Simulation response) {
         responseDao.save(response);
         try {
             System.out.println(new ObjectMapper().writeValueAsString(response));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        return "added";
+        return new ResponseEntity("added", HttpStatus.OK);
     }
 
     @RequestMapping(value = {"/get/{delay}", "/get"}, produces = {MediaType.APPLICATION_JSON_VALUE})
