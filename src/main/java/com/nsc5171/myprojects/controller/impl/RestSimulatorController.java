@@ -28,8 +28,8 @@ public class RestSimulatorController extends AppController {
     ResponseUtil responseUtil;
 
 
-    @PostMapping(value = {"{simulator}/{keySearchLocation}/{keyPath}/{delay}",
-            "{simulator}/{keySearchLocation}/{keyPath:.+}"})
+    @PostMapping(value = {"post/{simulator}/{keySearchLocation}/{keyPath}/{delay}",
+            "post/{simulator}/{keySearchLocation}/{keyPath:.+}"})
     public String getPOSTSimulation(HttpServletRequest request,
                                 HttpServletResponse response,
                                 @PathVariable String simulator,
@@ -52,8 +52,8 @@ public class RestSimulatorController extends AppController {
 
     }
 
-    @GetMapping(value = {"{simulator}/{keySearchLocation}/{keyPath}/{delay}",
-            "{simulator}/{keySearchLocation}/{keyPath:.+}"})
+    @GetMapping(value = {"get/{simulator}/{keySearchLocation}/{keyPath}/{delay}",
+            "get/{simulator}/{keySearchLocation}/{keyPath:.+}"})
     public String getGETSimulation(HttpServletRequest request,
                                    HttpServletResponse response,
                                    @PathVariable String simulator,
